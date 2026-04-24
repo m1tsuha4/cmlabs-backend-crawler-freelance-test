@@ -1,98 +1,199 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🕷️ Backend Website Crawler API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A backend application built with **NestJS** and **Puppeteer** to crawl websites and save the fully rendered HTML into local files.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project is designed to handle modern web applications including:
 
-## Description
+* **SSR (Server-Side Rendering)**
+* **SPA (Single Page Application)**
+* **PWA (Progressive Web App)**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🚀 Features
 
-```bash
-$ npm install
+* 🌐 Crawl any website via API
+* ⚡ Supports dynamic websites (SPA, PWA) using headless browser
+* 💾 Save rendered HTML into `.html` files
+* 🧾 Clean and structured output filenames (domain + timestamp)
+* 📁 File management (list & delete)
+* 🛡️ Basic validation and error handling
+
+---
+
+## 🧱 Tech Stack
+
+* **Node.js**
+* **NestJS**
+* **Puppeteer**
+* **TypeScript**
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+ ├── crawler/
+ │    ├── crawler.controller.ts
+ │    ├── crawler.service.ts
+ │    ├── crawler.module.ts
+ ├── main.ts
+output/
 ```
 
-## Compile and run the project
+---
+
+## ⚙️ Installation
 
 ```bash
-# development
-$ npm run start
+git clone https://github.com/m1tsuha4/cmlabs-backend-crawler-freelance-test.git
+cd cmlabs-backend-crawler-freelance-test
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
+---
+
+## ▶️ Running the App
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Deployment
+Server will run at:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```
+http://localhost:3000
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## 📡 API Endpoints
 
-Check out a few resources that may come in handy when working with NestJS:
+### 🔹 Crawl Website
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
+GET /crawl?url=https://www.cloudflare.com
+```
 
-## Support
+#### Response:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```json
+{
+  "success": true,
+  "message": "Crawling successful",
+  "file": "cloudflare-com-1777003850777.html"
+}
+```
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 🔹 Get All Crawled Files
 
-## License
+```
+GET /files
+```
+#### Response:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```json
+{
+  "success": true,
+  "message": "Files retrieved successfully",
+  "files": [
+    "cloudflare-com-1777003850777.html",
+    "cmlabs-co-1777003753636.html",
+    "sequence-day-1777003813177.html"
+  ],
+  "total": 3
+}
+```
+
+---
+
+### 🔹 Delete File
+
+```
+DELETE /files/:filename
+```
+
+---
+
+## 🧠 How It Works
+
+1. API receives a URL
+2. Puppeteer launches a headless browser
+3. Website is loaded and fully rendered
+4. JavaScript execution is completed
+5. HTML content is extracted using `page.content()`
+6. Base URL is injected to preserve asset paths
+7. HTML is saved into `/output` folder
+
+---
+
+## ⚠️ Notes on Rendering
+
+Modern websites (e.g. built with Next.js or React) rely heavily on client-side rendering.
+
+Even though this crawler captures fully rendered HTML:
+
+* Some assets (CSS, JS, images) may not load correctly when opened locally
+* This is due to relative paths and external dependencies
+
+To improve compatibility:
+
+* A `<base>` tag is injected into the HTML
+* Rendering wait strategy is applied (`networkidle2` + delay)
+
+---
+
+## 🌐 Tested Websites
+
+The crawler has been tested with:
+
+* https://cmlabs.co
+* https://sequence.day
+* https://www.cloudflare.com
+
+All websites were successfully crawled and saved.
+
+---
+
+## 📌 Output Example
+
+```
+output/
+ ├── cmlabs-co-1777003753636.html
+ ├── sequence-day-1777003813177.html
+ ├── cloudflare-com-1777003850777.html
+```
+
+---
+
+## ⭐ Possible Improvements
+
+* Queue system (Bull / Redis)
+* Parallel crawling
+* Screenshot generation
+* Metadata extraction (title, meta tags)
+* Resource optimization (block images/fonts)
+* Cloud storage integration
+
+---
+
+## 🧾 Conclusion
+
+This project demonstrates:
+
+* Backend API development with NestJS
+* Handling modern web rendering (SPA, SSR, PWA)
+* Web crawling using Puppeteer
+* File system management
+* Clean and scalable architecture
+
+---
+
+## 👨‍💻 Author
+
+Iqbal Defri Prasetya
+GitHub: https://github.com/m1tsuha4

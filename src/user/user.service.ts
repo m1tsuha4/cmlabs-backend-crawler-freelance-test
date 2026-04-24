@@ -3,11 +3,11 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
-} from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { PrismaService } from '../prisma/prisma.service';
-import * as bcrypt from 'bcryptjs';
+} from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { PrismaService } from "../prisma/prisma.service";
+import * as bcrypt from "bcryptjs";
 
 @Injectable()
 export class UserService {
@@ -19,7 +19,7 @@ export class UserService {
       },
     });
     if (existingUser) {
-      throw new BadRequestException('User already exists');
+      throw new BadRequestException("User already exists");
     }
     const hashPassword = await bcrypt.hash(createUserDto.password, 10);
     return await this.prisma.user.create({
@@ -52,7 +52,7 @@ export class UserService {
       },
     });
     if (existingUser.length === 0) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException("User not found");
     }
     return existingUser;
   }
@@ -72,7 +72,7 @@ export class UserService {
       },
     });
     if (!existingUser) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException("User not found");
     }
     return existingUser;
   }
@@ -85,7 +85,7 @@ export class UserService {
       },
     });
     if (!existingUser) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException("User not found");
     }
     const emailUser = await this.prisma.user.findUnique({
       where: {
@@ -93,7 +93,7 @@ export class UserService {
       },
     });
     if (emailUser && emailUser.id !== id) {
-      throw new BadRequestException('Email already exists');
+      throw new BadRequestException("Email already exists");
     }
     return await this.prisma.user.update({
       where: {
@@ -124,7 +124,7 @@ export class UserService {
       },
     });
     if (!existingUser) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException("User not found");
     }
     const user = await this.prisma.user.update({
       where: {

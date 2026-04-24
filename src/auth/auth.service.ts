@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { UserService } from 'src/user/user.service';
-import { LoginDto } from './dto/login.dto';
-import * as bcrypt from 'bcryptjs';
-import { UnauthorizedException } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { PrismaService } from "src/prisma/prisma.service";
+import { UserService } from "src/user/user.service";
+import { LoginDto } from "./dto/login.dto";
+import * as bcrypt from "bcryptjs";
+import { UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
 export class AuthService {
@@ -20,14 +20,14 @@ export class AuthService {
       },
     });
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException("Invalid credentials");
     }
     const isPasswordMatch = await bcrypt.compare(
       loginDto.password,
       user.password,
     );
     if (!isPasswordMatch) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException("Invalid credentials");
     }
     const payload = {
       sub: user.id,
@@ -51,7 +51,7 @@ export class AuthService {
       },
     });
     return {
-      message: 'Logout successfully',
+      message: "Logout successfully",
     };
   }
 }

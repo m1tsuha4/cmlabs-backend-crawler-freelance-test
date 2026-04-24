@@ -5,32 +5,32 @@ import {
   Req,
   UnauthorizedException,
   UseGuards,
-} from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { LoginDto, LoginSchema } from './dto/login.dto';
-import { ApiBearerAuth, ApiBody, ApiOkResponse } from '@nestjs/swagger';
-import { ResponseLoginDto } from './dto/response-login.dto';
-import { User } from '../common/decorators/user.decorator';
-import { JwtAuthGuard } from './guard/jwt-guard.auth';
-import type { Request } from 'express';
+} from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { ZodValidationPipe } from "../common/pipes/zod-validation.pipe";
+import { LoginDto, LoginSchema } from "./dto/login.dto";
+import { ApiBearerAuth, ApiBody, ApiOkResponse } from "@nestjs/swagger";
+import { ResponseLoginDto } from "./dto/response-login.dto";
+import { User } from "../common/decorators/user.decorator";
+import { JwtAuthGuard } from "./guard/jwt-guard.auth";
+import type { Request } from "express";
 
-@Controller('auth')
+@Controller("auth")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('login')
+  @Post("login")
   @ApiBody({
-    description: 'Login User',
+    description: "Login User",
     schema: {
       example: {
-        email: 'admin@cmlabs.com',
-        password: 'StrongPassword123!',
+        email: "admin@cmlabs.com",
+        password: "StrongPassword123!",
       },
     },
   })
   @ApiOkResponse({
-    description: 'Login User successfully',
+    description: "Login User successfully",
     type: ResponseLoginDto,
   })
   async login(@Body(new ZodValidationPipe(LoginSchema)) loginDto: LoginDto) {
@@ -40,14 +40,14 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({
-    description: 'Logout User successfully',
+    description: "Logout User successfully",
   })
-  @Post('logout')
+  @Post("logout")
   async logout(@User() user, @Req() request: Request) {
     const authHeader = request.headers.authorization;
-    const token = authHeader?.replace('Bearer ', '');
+    const token = authHeader?.replace("Bearer ", "");
     if (!token) {
-      throw new UnauthorizedException('No token provided');
+      throw new UnauthorizedException("No token provided");
     }
     return this.authService.logout(user.id, token);
   }

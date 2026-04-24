@@ -6,36 +6,36 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto, CreateUserSchema } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+} from "@nestjs/common";
+import { UserService } from "./user.service";
+import { CreateUserDto, CreateUserSchema } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 import {
   ApiBody,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
-} from '@nestjs/swagger';
-import { ResponseUserDto } from './dto/response-user.dto';
-import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
+} from "@nestjs/swagger";
+import { ResponseUserDto } from "./dto/response-user.dto";
+import { ZodValidationPipe } from "../common/pipes/zod-validation.pipe";
 
-@Controller('user')
+@Controller("user")
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
   @ApiBody({
-    description: 'Create a new user',
+    description: "Create a new user",
     schema: {
       example: {
-        email: 'admin@cmlabs.com',
-        password: 'StrongPassword123!',
-        name: 'Admin Cmlabs',
+        email: "admin@cmlabs.com",
+        password: "StrongPassword123!",
+        name: "Admin Cmlabs",
       },
     },
   })
   @ApiCreatedResponse({
-    description: 'User created successfully',
+    description: "User created successfully",
     type: ResponseUserDto,
   })
   create(
@@ -46,59 +46,59 @@ export class UserController {
 
   @Get()
   @ApiOkResponse({
-    description: 'List of users',
+    description: "List of users",
     type: [ResponseUserDto],
   })
   @ApiNotFoundResponse({
-    description: 'No users found',
+    description: "No users found",
   })
   findAll() {
     return this.userService.findAll();
   }
 
-  @Get(':id')
+  @Get(":id")
   @ApiOkResponse({
-    description: 'User found successfully',
+    description: "User found successfully",
     type: ResponseUserDto,
   })
   @ApiNotFoundResponse({
-    description: 'User not found',
+    description: "User not found",
   })
-  findOne(@Param('id') id: string) {
+  findOne(@Param("id") id: string) {
     return this.userService.findOne(id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   @ApiBody({
-    description: 'Update a user',
+    description: "Update a user",
     schema: {
       example: {
-        email: 'admin@cmlabs.com',
-        password: 'StrongPassword123!',
-        name: 'Admin Cmlabs',
+        email: "admin@cmlabs.com",
+        password: "StrongPassword123!",
+        name: "Admin Cmlabs",
       },
     },
   })
   @ApiOkResponse({
-    description: 'User updated successfully',
+    description: "User updated successfully",
     type: ResponseUserDto,
   })
   @ApiNotFoundResponse({
-    description: 'User not found',
+    description: "User not found",
   })
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @ApiOkResponse({
-    description: 'User deleted successfully',
+    description: "User deleted successfully",
     type: ResponseUserDto,
   })
   @ApiNotFoundResponse({
-    description: 'User not found',
+    description: "User not found",
   })
-  remove(@Param('id') id: string) {
+  remove(@Param("id") id: string) {
     return this.userService.remove(id);
   }
 }
